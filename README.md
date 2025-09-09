@@ -301,19 +301,14 @@ heroku config:set TOKEN=seu_token_bot
 
 Este projeto esta licenciado sob a MIT License - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
-## Suporte
 
-Para suporte e duvidas:
-- **Issues**: [GitHub Issues](https://github.com/seu-usuario/sistema-analise-resultados/issues)
-- **Email**: seu.email@exemplo.com
-- **Telegram**: @seu_usuario
 
 ## Features Futuras
 
 - [ ] Dashboard web para visualizacao de metricas
 - [ ] Integracao com outros sistemas de RI
-- [ ] Analise de sentimento dos resultados
-- [ ] Comparacoes automaticas entre trimestres
+- [X] Analise de sentimento dos resultados
+- [X] Comparacoes automaticas entre trimestres
 - [ ] Alertas por WhatsApp
 - [ ] API REST para integracao externa
 - [ ] Machine Learning para previsoes
@@ -322,3 +317,4 @@ Para suporte e duvidas:
 ---
 
 **Se este projeto foi util, deixe uma estrela no GitHub!**
+
