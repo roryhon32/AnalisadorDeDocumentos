@@ -23,7 +23,7 @@ class ProcessadorFinanceiro:
         # CORREÇÃO 1: Modelo válido (gpt-5-nano não existe)
         self.llm = ChatOpenAI(
             temperature=0, 
-            model="gpt-4.1-nano",   # Modelo real e mais barato
+            model="gpt-5-nano",   # Modelo real e mais barato
             max_tokens=2800,
             max_retries=2
         )

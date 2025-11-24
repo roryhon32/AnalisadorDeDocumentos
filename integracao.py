@@ -1,8 +1,10 @@
+
 #!/usr/bin/env python3
 """
 Sistema de integração corrigido para análise de resultados com bot Telegram
 Corrige problemas de importação, dependências e execução
 """
+# -*- coding: utf-8 -*-
 
 import os
 import sys
@@ -151,11 +153,11 @@ class IntegratedSystem:
     def start_bot(self):
         """Inicia o bot do Telegram em processo separado"""
         try:
-            print("🤖 Iniciando bot do Telegram...")
+            print(" Iniciando bot do Telegram...")
             
             # Verifica se já existe processo rodando
             if self.bot_process and self.bot_process.poll() is None:
-                print("⚠️ Bot já está rodando")
+                print(" Bot já está rodando")
                 return True
             
             self.bot_process = subprocess.Popen(
@@ -173,17 +175,17 @@ class IntegratedSystem:
                 if self.bot_process.poll() is not None:
                     # Processo terminou
                     output, _ = self.bot_process.communicate()
-                    print(f"❌ Bot falhou ao iniciar:")
+                    print(f" Bot falhou ao iniciar:")
                     print(output)
                     return False
                 
                 time.sleep(0.5)
             
-            print("✅ Bot do Telegram iniciado com sucesso")
+            print(" Bot do Telegram iniciado com sucesso")
             return True
         
         except Exception as e:
-            print(f"❌ Erro ao iniciar bot: {e}")
+            print(f" Erro ao iniciar bot: {e}")
             return False
     
     def save_last_check(self, result):

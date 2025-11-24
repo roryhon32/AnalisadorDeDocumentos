@@ -651,27 +651,43 @@ async def periodic_check(context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         print(f"Erro em periodic_check: {e}")
 
+import threading
+import asyncio
+import time
 
+def iniciar_verificacao_periodica(app):
+    async def loop():
+        # espera o bot subir
+        await asyncio.sleep(10)
+        while True:
+            try:
+                await periodic_check(app.bot)
+            except Exception as e:
+                print("Erro no verificador:", e)
+            await asyncio.sleep(300)  # 5 minutos
+
+    asyncio.run(loop())
 # Função principal do bot
 def main():
     app = Application.builder().token(TOKEN).build()
 
-    # Comandos básicos
+    # Handlers básicos
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("description", description))
     app.add_handler(CommandHandler("help", help_command))
     app.add_handler(CommandHandler("status", status_command))
     app.add_handler(CommandHandler("download", download_command))
     app.add_handler(CommandHandler("docx", docx_command))
-    # Comandos de assinatura
+
+    # Assinaturas
     app.add_handler(CommandHandler("subscribe", subscribe))
     app.add_handler(CommandHandler("unsubscribe", unsubscribe))
     app.add_handler(CommandHandler("list_subs", list_subs))
-    
-    # Handler para botões inline
+
+    # Inline buttons
     app.add_handler(CallbackQueryHandler(handle_callback_query))
 
-    # Conversa do /lastreport -> pergunta Sim/Não (mantido para compatibilidade)
+    # Conversa do /lastreport
     conv = ConversationHandler(
         entry_points=[CommandHandler("lastreport", lastreport)],
         states={
@@ -684,11 +700,13 @@ def main():
     )
     app.add_handler(conv)
 
-    # Handler para respostas Sim/Não vindas do envio automático
+    # Handler geral de confirmação
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_confirmation))
 
-    # Job que verifica automaticamente a cada 5 minutos
-    app.job_queue.run_repeating(periodic_check, interval=300, first=10)
+    # === JOB QUE VERIFICA NOVOS RELATÓRIOS ===
+    thread = threading.Thread(target=iniciar_verificacao_periodica, args=(app,), daemon=True)
+    thread.start()
+
 
     print("🤖 Bot rodando com verificação automática e sistema de downloads...")
     app.run_polling()
