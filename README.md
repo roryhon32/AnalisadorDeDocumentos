@@ -37,7 +37,7 @@ Este sistema oferece uma solucao completa e automatizada para:
 ### 1. Clone o repositorio
 
 ```bash
-git clone https://github.com/seu-usuario/sistema-analise-resultados.git
+git clone https://github.com/roryhon32/AnalisadorDeDocumentos.git
 cd sistema-analise-resultados
 ```
 
@@ -317,4 +317,5 @@ Este projeto esta licenciado sob a MIT License - veja o arquivo [LICENSE](LICENS
 ---
 
 **Se este projeto foi util, deixe uma estrela no GitHub!**
+
 
